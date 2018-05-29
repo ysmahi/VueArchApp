@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import cookie from 'vue-cookie'
+import VueCookie from 'vue-cookie'
 import { getToken } from './Utils/GithubApiCall'
 import Vue from 'vue'
 
-Vue.use(cookie)
+Vue.use(VueCookie)
 
 export default {
   name: 'App',
