@@ -5,7 +5,7 @@
     <ul id="ModelNavigator">
       <TreeItem
         class="TreeItem"
-        v-bind:model="treeData">
+        :model="treeData">
       </TreeItem>
     </ul>
   </div>
@@ -15,6 +15,7 @@
 import TreeItem from './TreeItem'
 import { getBranchSha, getNodeTreeRecursive } from '../../../Utils/GithubApiCall'
 import _ from 'lodash'
+import {mapState} from 'vuex'
 
 // ModelNavigator data
 /* var data = {
@@ -51,12 +52,12 @@ export default {
   components: {
     TreeItem
   },
-  data () {
-    return {
-      treeData: ''
-    }
+  data: function () {
+    return {}
   },
-
+  computed: mapState({
+    treeData: state => state.treeNavigator
+  }),
   mounted () {
     getBranchSha('ysmahi', 'ArchiTest', 'master')
       .then((sha) => {
@@ -64,15 +65,16 @@ export default {
           .then((treeRecursive) => {
             let allUrlsTree = treeRecursive.map((element) => element.path)
             let tree = arrangeIntoTree(allUrlsTree)
+            console.log('mytree', tree)
 
             let dataNavigator = {
               name: 'Architecture Model',
               id: '',
-              toggled: true,
+              open: true,
               children: tree
             }
 
-            this.treeData = dataNavigator
+            this.$store.commit('updateTreeNavigator', dataNavigator)
           })
       })
   }
