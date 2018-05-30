@@ -14,13 +14,12 @@
       Launch Query
     </button>
     <div v-if="response !== ''">
-      <form action="#">
-        <div class="mdl-textfield mdl-js-textfield has-placeholder">
-          <textarea class="mdl-textfield__input" rows="10" type="text" id="queryResponse"
-          :placeholder="jsonResponse"></textarea>
-          <label class="mdl-textfield__label" for="queryResponse">Response</label>
-        </div>
-      </form>
+      <div id="DivTable">
+        <Table id="Table"
+          :data="response"
+          :columns="gridColumns">
+        </Table>
+      </div>
       <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
               type="button"
               v-clipboard:copy="jsonResponse"
@@ -35,11 +34,13 @@ import * as alasql from 'alasql'
 import {xml2json} from 'xml-js'
 import Vue from 'vue'
 import VueClipboard from 'vue-clipboard2'
+import Table from '../GenericComponents/Table'
 
 Vue.use(VueClipboard)
 
 export default {
   name: 'QueryInterface',
+  components: {Table},
   data () {
     return {
       query: '',
@@ -50,6 +51,9 @@ export default {
   computed: {
     jsonResponse: function () {
       return JSON.stringify(this.response, null, 4)
+    },
+    gridColumns: function () {
+      return Object.keys(this.response[0])
     }
   },
   methods: {
@@ -170,5 +174,11 @@ export default {
 </script>
 
 <style scoped>
+#DivTable {
+  text-align:center;
+}
 
+#Table {
+  margin: auto;
+}
 </style>
