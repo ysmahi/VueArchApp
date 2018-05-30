@@ -87,8 +87,26 @@ export default {
           .then((content) => {
             let contentElement = atob(content)
             let jsonContentElement = JSON.parse(xml2json(contentElement))
-            // TODO : Do something with content
+            console.log('contentnttetet', jsonContentElement)
+
+            // Update displayed elements
+            this.$store.commit('changeDisplayedName', jsonContentElement.elements[0].attributes.name)
+            this.$store.commit('changeDisplayedId', jsonContentElement.elements[0].attributes.id)
+
+            let documentation = jsonContentElement.elements[0].attributes.documentation
+            if (typeof documentation === 'undefined') {
+              documentation = 'Write documentation here'
+            }
+            this.$store.commit('changeDisplayedDocumentation', documentation)
+            this.$store.commit('changeDisplayedType', jsonContentElement.elements[0].name)
             // this.props.dataElementHandler(jsonContentElement, this.model.id)
+
+            let properties = []
+            if (jsonContentElement.elements[0].hasOwnProperty('elements')) {
+              properties = jsonContentElement.elements[0].elements.map(el => el.attributes)
+            }
+
+            this.$store.commit('changeDisplayedProperties', properties)
           })
       }
     }

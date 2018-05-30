@@ -6,7 +6,12 @@ Vue.use(Vuex)
 // State
 const state = {
   alreadyToggledFolders: [''],
-  treeNavigator: {}
+  treeNavigator: {},
+  displayedElementName: 'Name of Element',
+  displayedElementId: 'ID',
+  displayedElementDocumentation: 'Documentation',
+  displayedElementType: 'Type of Element',
+  displayedElementProperties: []
 }
 
 // Getters
@@ -37,6 +42,22 @@ const mutations = {
   },
   updateTreeNavigator (state, tree) {
     state.treeNavigator = tree
+  },
+  changeDisplayedName (state, name) {
+    state.displayedElementName = name
+  },
+  changeDisplayedId (state, id) {
+    state.displayedElementId = id
+  },
+  changeDisplayedDocumentation (state, documentation) {
+    state.displayedElementDocumentation = documentation
+  },
+  changeDisplayedType (state, type) {
+    state.displayedElementType = type
+  },
+  changeDisplayedProperties (state, properties) {
+    // properties should be an array of json {key: <prop_name>, value: <prop_value>}
+    state.displayedElementProperties = properties
   }
 }
 
