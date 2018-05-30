@@ -1,5 +1,5 @@
 <template xmlns:v-clipboard="http://www.w3.org/1999/xhtml">
-  <div className='QueryInterface'>
+  <div id='QueryInterface'>
     <form action="#">
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label has-placeholder">
         <input class="mdl-textfield__input"
