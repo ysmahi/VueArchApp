@@ -31,9 +31,7 @@ export let getBranchSha = (username, repoName, branchName, token = '') => {
               reject('Error in getBranchSha')
             }
           })
-      }
-
-      else {
+      } else {
         axios.get(apiUrl + reposUrl + username + '/' + repoName + '/branches/' + branchName,
           {headers: {Authorization: 'Bearer ' + token}})
           .then((response) => {

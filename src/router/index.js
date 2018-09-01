@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ReadModifyInterface from '../components/ReadModifyInterface/ReadModifyInterface'
+import ConnectionPage from '../ConnectionPage'
+import GlobalInterface from '../components/GlobalInterface'
 
 Vue.use(Router)
 
@@ -8,8 +9,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'ReadModifyInterface',
-      component: ReadModifyInterface
+      name: 'GlobalInterface',
+      component: GlobalInterface
+    },
+    {
+      path: '/connection',
+      name: 'ConnectionPage',
+      component: ConnectionPage
     }
   ]
 })
